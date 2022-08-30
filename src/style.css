@@ -1,0 +1,38 @@
+/* Roots */
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HTML Elements */
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Classes */
+
+.container {
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+}
+
+.navbar {
+    background-color: rgb(255, 70, 42);
+    height: 2.5rem;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+}
+
+.sidebar {
+    width: 15rem;
+}
+
+.list {
+    flex: 1;
+    background-color: rgb(234, 232, 232);
+}
