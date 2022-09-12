@@ -1,0 +1,49 @@
+... create array to store task groups
+
+... Create function to render all UI elements
+function userInterface(navBar, sideBar, taskList) 
+{
+    ... create container div element
+
+    ... create topBar div element
+    ... create contentArea div element
+
+    ... append navBar to topBar
+    ... append sideBar and taskList to contentArea
+
+    ... append topBar and contentArea to container
+
+    ... return container
+}
+
+... Create function to create topBar
+function topBar()
+{
+    ... create container div element
+
+    ... create functionalities using button element
+    ...
+    ...
+    ...
+
+    ... append elements to container
+
+    ... return container
+}
+
+... Create function to create sideBar
+function sideBar()
+{
+    ... create container div element
+
+    ... create a button to make new group using button element
+    ... add an event listener to the button to create new objects
+
+    ... push group object created to the array
+    ... render all items in the array
+}
+
+function contentArea() 
+{
+    ... similar procedure to the sideBar
+}

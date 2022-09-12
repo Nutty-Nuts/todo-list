@@ -30,6 +30,31 @@ body {
 
 .sidebar {
     width: 15rem;
+
+    box-sizing: border-box;
+
+    padding: 1rem;
+}
+
+.sidebar .group {
+    background-color: rgb(240, 240, 240);
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+
+    height: 3rem;
+
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+
+    display: flex;
+}
+
+.sidebar .group-title {
+    border: 0px;
+    border-radius: 0.25rem;
+    background-color: rgb(240, 240, 240);
+
+    flex: 1;
 }
 
 .list {
