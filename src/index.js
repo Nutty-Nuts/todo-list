@@ -1,17 +1,71 @@
+// native modules
+import TaskGroup from "./modules/group";
 import Task from "./modules/task";
+
+// node modules
 import { format } from "date-fns";
 
 // import { createTask } from "./modules/ui";
 // import { renderTask } from "./modules/ui";
 
+var taskGroups = [];
 var taskList = [];
-var isEmpty = true;
+
+var isTaskEmpty = true;
+var isGroupEmpty = true;
 var isReversed = false;
+
+var activeGroup;
+
+var counterID = 1;
+
+function setToday() {
+    let date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    let today = year + "-" + month + "-" + day;
+    return today;
+}
+
+function createGroup() {
+    // creates a new group of tasks
+    let container = document.createElement("div");
+    container.classList.add("group-form");
+    container.innerHTML = `
+    <form action="">
+        <input 
+            type="text" 
+            name="groupName" 
+            id="group-name" 
+            placeholder="Group Name" 
+        />
+
+    </form>
+    <br/>
+    `;
+
+    let button = document.createElement("button");
+
+    button.classList.add("create-group");
+    button.innerHTML = "Create Group";
+    button.addEventListener("click", handleGroup);
+
+    container.appendChild(button);
+
+    return container;
+}
 
 function createTask() {
     let container = document.createElement("div");
     container.classList.add("task-form");
     container.innerHTML = `
+    <br/>
     <form action="">
         <input 
             type="text" 
@@ -49,6 +103,19 @@ function createTask() {
     return container;
 }
 
+function handleGroup() {
+    // handles element creating for task groups
+    let name = document.getElementById("group-name").value;
+    document.getElementById("group-name").value = "";
+
+    let newGroup = new TaskGroup(name, counterID);
+    counterID = counterID + 1;
+
+    taskGroups.push(newGroup);
+
+    renderGroup();
+}
+
 function handleTask() {
     let name = document.getElementById("task-name").value;
     document.getElementById("task-name").value = "";
@@ -66,23 +133,45 @@ function handleTask() {
     renderTask();
 }
 
-function setToday() {
-    let date = new Date();
+function initGroup() {
+    // initialize group on click
+    console.log("Init Group");
+}
 
-    let day = date.getDate();
-    let month = date.getMonth();
-    let year = date.getFullYear();
+function renderGroup() {
+    // renders the elements of a task group
 
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
+    if (isGroupEmpty) {
+        isGroupEmpty = !isGroupEmpty;
+    } else {
+        document.getElementById("groups").remove();
+    }
 
-    let today = year + "-" + month + "-" + day;
-    return today;
+    let groups = document.createElement("div");
+    groups.classList.add("groups");
+    groups.setAttribute("id", "groups");
+
+    for (let i = taskGroups.length - 1; i >= 0; i--) {
+        let group = document.createElement("div");
+        group.classList.add("group");
+        group.innerHTML = `
+        <p>
+            <a><b>${taskGroups[i].name}</b></a>
+        </p>
+        `;
+
+        group.addEventListener("click", initGroup);
+        group.setAttribute("data-id", taskGroups[i].id);
+
+        groups.appendChild(group);
+    }
+
+    document.querySelector(".groups-area").append(groups);
 }
 
 function renderTask() {
-    if (isEmpty) {
-        isEmpty = !isEmpty;
+    if (isTaskEmpty) {
+        isTaskEmpty = !isTaskEmpty;
     } else {
         document.getElementById("tasks").remove();
     }
@@ -107,7 +196,8 @@ function renderTask() {
         tasks.appendChild(task);
     }
 
-    document.querySelector(".container").append(tasks);
+    document.querySelector(".tasks-area").append(tasks);
 }
 
-document.querySelector(".container").append(createTask());
+document.querySelector(".groups-area").append(createGroup());
+document.querySelector(".tasks-area").append(createTask());
