@@ -12,7 +12,7 @@ var isTaskEmpty = true;
 var isGroupEmpty = true;
 var isReversed = false;
 
-var activeGroup = 0;
+var activeGroup;
 
 var counterID = 1;
 
@@ -22,8 +22,15 @@ let thisMonth = new TaskGroup("This Month", 3);
 
 taskGroups.push(today, thisWeek, thisMonth);
 
+let assignments = new Task("Do Assignments", "9-14-2022", "9-15-2022");
+let mass = new Task("Go to Mass", "9-14-2022", "9-18-2022");
+
+today.setTasks(assignments);
+thisWeek.setTasks(mass);
+
+console.table(today.tasks);
+
 renderGroup();
-renderTask();
 
 function setToday() {
     let date = new Date();
@@ -38,6 +45,34 @@ function setToday() {
     let today = year + "-" + month + "-" + day;
     return today;
 }
+
+// function createGroup() {
+//     // creates a new group of tasks
+//     let container = document.createElement("div");
+//     container.classList.add("group-form");
+//     container.innerHTML = `
+//     <form action="">
+//         <input
+//             type="text"
+//             name="groupName"
+//             id="group-name"
+//             placeholder="Group Name"
+//         />
+
+//     </form>
+//     <br/>
+//     `;
+
+//     let button = document.createElement("button");
+
+//     button.classList.add("create-group");
+//     button.innerHTML = "Create Group";
+//     button.addEventListener("click", handleGroup);
+
+//     container.appendChild(button);
+
+//     return container;
+// }
 
 function createTask() {
     let container = document.createElement("div");
@@ -81,6 +116,19 @@ function createTask() {
     return container;
 }
 
+function handleGroup() {
+    // handles element creating for task groups
+    let name = document.getElementById("group-name").value;
+    document.getElementById("group-name").value = "";
+
+    let newGroup = new TaskGroup(name, counterID);
+    counterID = counterID + 1;
+
+    taskGroups.push(newGroup);
+
+    renderGroup();
+}
+
 function handleTask() {
     let name = document.getElementById("task-name").value;
     document.getElementById("task-name").value = "";
@@ -119,6 +167,22 @@ function renderGroup() {
     let groups = document.createElement("div");
     groups.classList.add("groups");
     groups.setAttribute("id", "groups");
+
+    // for (let i = taskGroups.length - 1; i >= 0; i--) {
+    //     let group = document.createElement("div");
+    //     group.classList.add("group");
+    //     group.innerHTML = `
+    //     <p>
+    //         <a><b>${taskGroups[i].name}</b></a>
+    //     </p>
+    //     `;
+
+    //     group.setAttribute("data-index", taskGroups[i].id);
+
+    //     group.addEventListener("click", initGroup);
+
+    //     groups.appendChild(group);
+    // }
 
     let today = document.createElement("div");
     today.classList.add("group");
