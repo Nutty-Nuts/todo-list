@@ -1,3 +1,7 @@
+// TODO: Implement "remove tasks"
+// TODO: Modularize functions and files
+// TODO: Refactor entire codebase
+
 // native modules
 import TaskGroup from "./modules/group";
 import Task from "./modules/task";
