@@ -8,9 +8,7 @@ import { format } from "date-fns";
 var taskGroups = [];
 var taskList = [];
 
-var isTaskEmpty = true;
 var isGroupEmpty = true;
-var isReversed = false;
 
 var activeGroup = 0;
 
@@ -20,9 +18,25 @@ let today = new TaskGroup("Today", 1);
 let thisWeek = new TaskGroup("This Week", 2);
 let thisMonth = new TaskGroup("This Month", 3);
 
+if (localStorage.getItem("today") === null) {
+    console.log("Empty");
+} else {
+    console.log("Occupied");
+    today = JSON.parse(localStorage.getItem("today"));
+    thisWeek = JSON.parse(localStorage.getItem("thisWeek"));
+    thisMonth = JSON.parse(localStorage.getItem("thisMonth"));
+}
+
 taskGroups.push(today, thisWeek, thisMonth);
 
+console.table(taskGroups);
+
 renderGroup();
+
+console.table(today);
+
+document.querySelector(".tasks-area").append(createTask());
+
 renderTask();
 
 function setToday() {
@@ -97,12 +111,17 @@ function handleTask() {
 
     taskGroups[activeGroup].tasks = taskList;
 
+    localStorage.setItem("today", JSON.stringify(today));
+    localStorage.setItem("thisWeek", JSON.stringify(thisWeek));
+    localStorage.setItem("thisMonth", JSON.stringify(thisMonth));
+
+    console.table(JSON.parse(localStorage.getItem("today")));
+
     renderTask();
 }
 
 function initGroup() {
     // initialize group on click
-    console.log("Init Group");
 
     renderTask();
 }
@@ -171,15 +190,15 @@ function renderGroup() {
 }
 
 function renderTask() {
-    if (isTaskEmpty) {
-        isTaskEmpty = !isTaskEmpty;
-    } else {
+    let existID = document.getElementById("tasks");
+
+    if (existID !== null) {
         document.getElementById("tasks").remove();
     }
 
     taskList = taskGroups[activeGroup].tasks;
 
-    console.table(taskList);
+    console.table(taskGroups);
 
     let tasks = document.createElement("div");
     tasks.classList.add("tasks");
@@ -205,4 +224,3 @@ function renderTask() {
 }
 
 // document.querySelector(".groups-area").append(createGroup());
-document.querySelector(".tasks-area").append(createTask());
