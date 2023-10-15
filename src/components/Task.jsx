@@ -12,6 +12,7 @@ export default function Task({
             <label className="task">
                 <input type="checkbox" onChange={check} checked={completed} />
                 {name}
+                {due.toLocaleDateString()}
             </label>
         </div>
     );

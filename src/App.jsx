@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles/App.css";
-import Task from "./components/Task";
 import { v4 as uuid } from "uuid";
+import Tasks from "./components/Tasks";
 
 export default function App() {
     const [count, setCount] = useState(0);
@@ -9,8 +9,8 @@ export default function App() {
     const [tasks, setTasks] = useState({
         [uuid()]: {
             name: "Study Programming",
-            created: "10/15/23",
-            due: "10/20/23",
+            created: new Date(2023, 10, 15),
+            due: new Date(2023, 10, 20),
             completed: false,
         },
     });
@@ -27,22 +27,9 @@ export default function App() {
         }));
     };
 
-    const mapTasks = Object.entries(tasks).map((entry) => {
-        const [key, value] = entry;
-
-        return (
-            <Task
-                name={value.name}
-                created={value.created}
-                due={value.due}
-                completed={value.completed}
-                check={handleCheck}
-                id={key}
-                key={key}
-                value=""
-            />
-        );
-    });
-
-    return <div>{mapTasks}</div>;
+    return (
+        <div>
+            <Tasks tasks={tasks} check={handleCheck} />
+        </div>
+    );
 }
