@@ -17,7 +17,7 @@ export default function App() {
         [uuid()]: {
             name: "Submit Assignments",
             created: new Date(2023, 10, 15),
-            due: new Date(2023, 10, 26),
+            due: new Date(2023, 10, 24),
             completed: false,
         },
         [uuid()]: {
@@ -42,7 +42,6 @@ export default function App() {
 
     return (
         <div>
-            <Tasks tasks={tasks} check={handleCheck} />
             <Views tasks={tasks} check={handleCheck} />
         </div>
     );

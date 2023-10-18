@@ -6,13 +6,17 @@ export default function Views({ tasks, check }) {
     const [daysLeft, setDaysLeft] = useState(1);
     const [renderTasks, setRenderTasks] = useState({});
 
+    const handleClick = (days) => {
+        setDaysLeft(() => days);
+    };
+
     useEffect(() => {
         let temp = {};
         Object.entries(tasks).map(([key, value]) => {
             const timeDifference = value.due.getTime() - now.getTime();
             const dayDifference = timeDifference / (1000 * 3600 * 24);
 
-            if (dayDifference < daysLeft) {
+            if (dayDifference <= daysLeft) {
                 temp = { ...temp, [key]: value };
             }
         });
@@ -22,6 +26,17 @@ export default function Views({ tasks, check }) {
 
     return (
         <div>
+            <div>
+                <button type="button" onClick={() => handleClick(1)}>
+                    Today
+                </button>
+                <button type="button" onClick={() => handleClick(7)}>
+                    This Week
+                </button>
+                <button type="button" onClick={() => handleClick(30)}>
+                    This Month
+                </button>
+            </div>
             <Tasks tasks={renderTasks} check={check} />
         </div>
     );
