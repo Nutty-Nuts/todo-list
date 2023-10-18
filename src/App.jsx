@@ -3,6 +3,7 @@ import "./styles/App.css";
 import { v4 as uuid } from "uuid";
 import Tasks from "./components/Tasks";
 import Views from "./components/Views";
+import Create from "./components/Create";
 
 export default function App() {
     const [count, setCount] = useState(0);
@@ -10,20 +11,20 @@ export default function App() {
     const [tasks, setTasks] = useState({
         [uuid()]: {
             name: "Study Programming",
-            created: new Date(2023, 10, 15),
-            due: new Date(2023, 10, 17),
+            created: new Date(2023, 9, 15),
+            due: new Date(2023, 9, 17),
             completed: false,
         },
         [uuid()]: {
             name: "Submit Assignments",
-            created: new Date(2023, 10, 15),
-            due: new Date(2023, 10, 24),
+            created: new Date(2023, 9, 15),
+            due: new Date(2023, 9, 24),
             completed: false,
         },
         [uuid()]: {
             name: "Study Programming",
-            created: new Date(2023, 10, 15),
-            due: new Date(2023, 10, 30),
+            created: new Date(2023, 9, 15),
+            due: new Date(2023, 9, 30),
             completed: false,
         },
     });
@@ -40,9 +41,22 @@ export default function App() {
         }));
     };
 
+    const handleSubmit = (id, name, created, due, completed) => {
+        setTasks((prev) => ({
+            ...prev,
+            [id]: {
+                name: name,
+                created: created,
+                due: due,
+                completed: completed,
+            },
+        }));
+    };
+
     return (
         <div>
             <Views tasks={tasks} check={handleCheck} />
+            <Create submit={handleSubmit} />
         </div>
     );
 }

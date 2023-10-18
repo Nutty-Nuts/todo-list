@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Tasks from "./Tasks";
 
 export default function Views({ tasks, check }) {
-    const now = new Date(2023, 10, 17);
+    const now = new Date();
     const [daysLeft, setDaysLeft] = useState(1);
     const [renderTasks, setRenderTasks] = useState({});
 
