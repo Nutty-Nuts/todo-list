@@ -1,11 +1,13 @@
+import PropTypes from "prop-types";
+
 export default function Task({
     name,
-    created,
+    // created,
     due,
     completed,
     check,
     id,
-    value,
+    // value,
 }) {
     return (
         <div id={id}>
@@ -17,3 +19,12 @@ export default function Task({
         </div>
     );
 }
+
+Task.propTypes = {
+    name: PropTypes.string.isRequired,
+    created: PropTypes.instanceOf(Date).isRequired,
+    due: PropTypes.instanceOf(Date).isRequired,
+    completed: PropTypes.bool.isRequired,
+    check: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+};

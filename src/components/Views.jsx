@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Tasks from "./Tasks";
 
 export default function Views({ tasks, check }) {
-    const now = new Date();
     const [daysLeft, setDaysLeft] = useState(1);
     const [renderTasks, setRenderTasks] = useState({});
 
@@ -12,6 +12,8 @@ export default function Views({ tasks, check }) {
 
     useEffect(() => {
         let temp = {};
+        let now = new Date();
+
         Object.entries(tasks).map(([key, value]) => {
             const timeDifference = value.due.getTime() - now.getTime();
             const dayDifference = timeDifference / (1000 * 3600 * 24);
@@ -27,6 +29,9 @@ export default function Views({ tasks, check }) {
     return (
         <div>
             <div>
+                <button type="button" onClick={() => handleClick(Infinity)}>
+                    All
+                </button>
                 <button type="button" onClick={() => handleClick(1)}>
                     Today
                 </button>
@@ -41,3 +46,8 @@ export default function Views({ tasks, check }) {
         </div>
     );
 }
+
+Views.propTypes = {
+    tasks: PropTypes.object.isRequired,
+    check: PropTypes.func.isRequired,
+};

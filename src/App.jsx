@@ -1,13 +1,10 @@
 import { useState } from "react";
 import "./styles/App.css";
 import { v4 as uuid } from "uuid";
-import Tasks from "./components/Tasks";
 import Views from "./components/Views";
 import Create from "./components/Create";
 
 export default function App() {
-    const [count, setCount] = useState(0);
-
     const [tasks, setTasks] = useState({
         [uuid()]: {
             name: "Study Programming",
