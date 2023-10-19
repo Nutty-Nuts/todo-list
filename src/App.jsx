@@ -5,22 +5,14 @@ import Views from "./components/Views";
 import Create from "./components/Create";
 
 export default function App() {
-    const [tasks, setTasks] = useState({
-        [uuid()]: {
-            name: "Study Programming",
-            created: [2023, 9, 15],
-            due: [2023, 9, 17],
-            completed: false,
-        },
-        [uuid()]: {
-            name: "Study Programming",
-            created: [2023, 9, 15],
-            due: [2023, 9, 29],
-            completed: false,
-        },
-    });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(JSON.parse(localStorage.getItem("tasks")));
+    const [tasks, setTasks] = useState(
+        localStorage.getItem("tasks")
+            ? JSON.parse(localStorage.getItem("tasks"))
+            : {}
+    );
+    // localStorage.setItem("tasks", JSON.stringify(tasks));
+    // console.log(JSON.parse(localStorage.getItem("tasks")));
+    // console.log("tasks", tasks);
 
     const handleCheck = (event) => {
         const grandparent = event.target.parentElement.parentElement;

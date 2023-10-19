@@ -10,14 +10,12 @@ export default function Create({ submit }) {
     };
 
     const handleDateChange = ({ target }) => {
-        console.log("target", target.value);
         let date = target.value.split("-").map(Number);
         date[1] = date[1] - 1;
         setTaskData((prev) => ({
             ...prev,
             [target.id]: date,
         }));
-        console.log("due", taskData.due);
     };
 
     const handleSubmit = () => {
@@ -48,12 +46,9 @@ export default function Create({ submit }) {
 }
 
 function dateToString(date) {
-    console.log("date", date);
     const day = date[2].toString().padStart(2, "0");
     const month = (date[1] + 1).toString().padStart(2, "0");
     const year = date[0];
-
-    console.log(day, month, year);
 
     return `${year}-${month}-${day}`;
 }
