@@ -54,7 +54,7 @@ function dateToString(date) {
 }
 
 function taskDataTemplate() {
-    const date = new Date(2023, 9, 19);
+    const date = new Date();
     const now = [date.getFullYear(), date.getMonth(), date.getDate()];
 
     return {

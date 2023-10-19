@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./styles/App.css";
-import Views from "./components/Views";
 import Create from "./components/Create";
 import Tasks from "./components/Tasks";
+import Sidebar from "./components/Sidebar";
 
 export default function App() {
     const [daysLeft, setDaysLeft] = useState(1);
@@ -69,10 +69,12 @@ export default function App() {
     }, [tasks, daysLeft]);
 
     return (
-        <div>
-            <Views tasks={tasks} change={handleChangeViews} />
-            <Tasks tasks={renderTasks} check={handleCheck} />
-            <Create submit={handleCreateTask} />
+        <div className="app">
+            <Sidebar tasks={tasks} change={handleChangeViews} />
+            <div>
+                <Create submit={handleCreateTask} />
+                <Tasks tasks={renderTasks} check={handleCheck} />
+            </div>
         </div>
     );
 }
