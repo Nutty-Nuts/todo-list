@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles/App.css";
 import { v4 as uuid } from "uuid";
 import Views from "./components/Views";
@@ -10,9 +10,6 @@ export default function App() {
             ? JSON.parse(localStorage.getItem("tasks"))
             : {}
     );
-    // localStorage.setItem("tasks", JSON.stringify(tasks));
-    // console.log(JSON.parse(localStorage.getItem("tasks")));
-    // console.log("tasks", tasks);
 
     const handleCheck = (event) => {
         const grandparent = event.target.parentElement.parentElement;
@@ -37,6 +34,12 @@ export default function App() {
             },
         }));
     };
+
+    useEffect(() => {
+        if (tasks !== null) {
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+    }, [tasks]);
 
     return (
         <div>
