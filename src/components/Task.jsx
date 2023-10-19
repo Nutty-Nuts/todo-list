@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "../styles/Task.css";
 
 export default function Task({
     name,
@@ -13,8 +14,13 @@ export default function Task({
         <div id={id}>
             <label className="task">
                 <input type="checkbox" onChange={check} checked={completed} />
-                {name}
-                {`${due[1] + 1}/${due[2]}/${due[0]}`}
+                <span className="checkmark"></span>
+                <div className="task-content">
+                    <div className="task-name">{name}</div>
+                    <div className="task-due">{`${due[1] + 1}/${due[2]}/${
+                        due[0]
+                    }`}</div>
+                </div>
             </label>
         </div>
     );
