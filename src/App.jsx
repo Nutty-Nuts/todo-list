@@ -8,23 +8,19 @@ export default function App() {
     const [tasks, setTasks] = useState({
         [uuid()]: {
             name: "Study Programming",
-            created: new Date(2023, 9, 15),
-            due: new Date(2023, 9, 17),
-            completed: false,
-        },
-        [uuid()]: {
-            name: "Submit Assignments",
-            created: new Date(2023, 9, 15),
-            due: new Date(2023, 9, 24),
+            created: [2023, 9, 15],
+            due: [2023, 9, 17],
             completed: false,
         },
         [uuid()]: {
             name: "Study Programming",
-            created: new Date(2023, 9, 15),
-            due: new Date(2023, 9, 30),
+            created: [2023, 9, 15],
+            due: [2023, 9, 29],
             completed: false,
         },
     });
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    console.log(JSON.parse(localStorage.getItem("tasks")));
 
     const handleCheck = (event) => {
         const grandparent = event.target.parentElement.parentElement;

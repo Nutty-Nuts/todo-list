@@ -14,7 +14,7 @@ export default function Task({
             <label className="task">
                 <input type="checkbox" onChange={check} checked={completed} />
                 {name}
-                {due.toLocaleDateString()}
+                {`${due[1] + 1}/${due[2]}/${due[0]}`}
             </label>
         </div>
     );
@@ -22,8 +22,8 @@ export default function Task({
 
 Task.propTypes = {
     name: PropTypes.string.isRequired,
-    created: PropTypes.instanceOf(Date).isRequired,
-    due: PropTypes.instanceOf(Date).isRequired,
+    created: PropTypes.array.isRequired,
+    due: PropTypes.array.isRequired,
     completed: PropTypes.bool.isRequired,
     check: PropTypes.func.isRequired,
     id: PropTypes.string.isRequired,

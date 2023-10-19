@@ -15,7 +15,9 @@ export default function Views({ tasks, check }) {
         let now = new Date();
 
         Object.entries(tasks).map(([key, value]) => {
-            const timeDifference = value.due.getTime() - now.getTime();
+            let due = new Date(value.due[0], value.due[1], value.due[2]);
+
+            const timeDifference = due.getTime() - now.getTime();
             const dayDifference = timeDifference / (1000 * 3600 * 24);
 
             if (dayDifference <= daysLeft) {

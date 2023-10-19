@@ -3,24 +3,21 @@ import PropTypes from "prop-types";
 import { v4 as uuid } from "uuid";
 
 export default function Create({ submit }) {
-    const [taskData, setTaskData] = useState({
-        id: uuid(),
-        name: "task name",
-        created: new Date(),
-        due: new Date(),
-        completed: false,
-    });
+    const [taskData, setTaskData] = useState(taskDataTemplate());
 
     const handleTextChange = ({ target }) => {
         setTaskData((prev) => ({ ...prev, [target.id]: target.value }));
     };
 
     const handleDateChange = ({ target }) => {
+        console.log("target", target.value);
+        let date = target.value.split("-").map(Number);
+        date[1] = date[1] - 1;
         setTaskData((prev) => ({
             ...prev,
-            [target.id]: new Date(target.value),
+            [target.id]: date,
         }));
-        console.log(taskData.due);
+        console.log("due", taskData.due);
     };
 
     const handleSubmit = () => {
@@ -51,19 +48,25 @@ export default function Create({ submit }) {
 }
 
 function dateToString(date) {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear().toString().padStart(2, "0");
+    console.log("date", date);
+    const day = date[2].toString().padStart(2, "0");
+    const month = (date[1] + 1).toString().padStart(2, "0");
+    const year = date[0];
+
+    console.log(day, month, year);
 
     return `${year}-${month}-${day}`;
 }
 
 function taskDataTemplate() {
+    const date = new Date(2023, 9, 19);
+    const now = [date.getFullYear(), date.getMonth(), date.getDate()];
+
     return {
         id: uuid(),
         name: "task name",
-        created: new Date(),
-        due: new Date(),
+        created: now,
+        due: now,
         completed: false,
     };
 }
