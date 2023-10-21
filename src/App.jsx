@@ -58,6 +58,12 @@ export default function App() {
             const dayDifference = timeDifference / (1000 * 3600 * 24);
 
             if (
+                dayDifference >= daysLeft &&
+                dayDifference < -1 &&
+                daysLeft === -Infinity
+            ) {
+                temp = { ...temp, [key]: value };
+            } else if (
                 dayDifference <= daysLeft &&
                 (dayDifference >= -1 || daysLeft === Infinity)
             ) {
@@ -71,9 +77,11 @@ export default function App() {
     return (
         <div className="app">
             <Sidebar tasks={tasks} change={handleChangeViews} />
-            <div>
-                <Create submit={handleCreateTask} />
-                <Tasks tasks={renderTasks} check={handleCheck} />
+            <div className="content-container">
+                <div className="content">
+                    <Create submit={handleCreateTask} />
+                    <Tasks tasks={renderTasks} check={handleCheck} />
+                </div>
             </div>
         </div>
     );

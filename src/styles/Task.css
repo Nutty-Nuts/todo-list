@@ -15,6 +15,7 @@
     padding-left: 3.5rem;
     border-radius: 8px;
     box-shadow: 0px 0px 12px 0px rgba(108, 108, 108, 0.2);
+    width: 35vw;
 }
 
 /* Hide the browser's default checkbox */
@@ -67,10 +68,10 @@
 
 /* Style the checkmark/indicator */
 .task .checkmark:after {
-    left: 6.5px;
+    left: 6px;
     top: 3px;
-    width: 4px;
-    height: 8px;
+    width: 5px;
+    height: 10px;
     border: solid white;
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);

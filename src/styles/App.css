@@ -2,3 +2,18 @@
     display: flex;
     flex-direction: row;
 }
+
+.content-container {
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content {
+    padding: 2rem;
+}
+
+.icons {
+    font-size: 16px;
+    margin-right: 12px;
+}
